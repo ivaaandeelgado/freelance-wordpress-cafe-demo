@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.angular/
+artifacts/
+blueprint.json
+evidence/
+test-results/
+playwright-report/
+.env*
+*.log
+.DS_Store
+Thumbs.db

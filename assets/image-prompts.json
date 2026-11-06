@@ -1,0 +1,14 @@
+{
+  "tool": "image_gen (built-in)",
+  "purpose": "Original fictional Miga portfolio concept; not photographs of a real business.",
+  "prompts": [
+    {
+      "key": "miga-cafe",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide hero photograph for an original fictional artisan café and bakery website called Miga. Create a beautiful, believable editorial architectural photograph of a small Mediterranean neighborhood café interior, softly worn honey oak furniture, bentwood chairs, burgundy brown upholstery, plaster walls, deep rust-red accent wall, pale limestone bar, a few pastries behind glass and a classic espresso machine. Warm morning sunlight rakes across the floor from tall windows on the right, gentle film grain, natural unpolished material detail, quiet and soulful hospitality magazine art direction. Landscape 3:2 composition, wide angle but no extreme distortion; empty space toward left for website text overlay, most attractive counter details at center-right, no people. Rich chocolate shadows and warm cream highlights, sophisticated warm light, no orange color cast. No signage, no readable text, no logo, no watermark. This is an original illustrative concept space, not an actual existing establishment."
+    },
+    {
+      "key": "miga-breakfast",
+      "prompt": "Use case: photorealistic-natural. Asset type: editorial food photograph for fictional artisan café Miga. Create a close editorial still life of a handmade ivory ceramic cappuccino with lovely natural latte art, one flaky golden croissant broken slightly to show its crumb, a small oval ceramic plate with sourdough toast, a subtle butter curl, and a soft cream linen napkin on an aged honey oak café table. Gentle low morning side light, deep chocolate shadows, warm neutral tones, muted terracotta accent from a second empty ceramic plate. Believable food, beautiful appetizing flaky texture, quiet artisanal European café mood, premium independent food magazine photography, 50mm lens look, overhead three-quarter angle. Landscape 3:2 image, balanced asymmetrical arrangement, no people, no text, no logos, no watermark. Original illustration for a fictional portfolio café."
+    }
+  ]
+}

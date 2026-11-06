@@ -1,0 +1,16 @@
+{
+  "name": "freelance-wordpress-cafe-demo",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-blueprint.mjs",
+    "start": "node serve.mjs",
+    "test": "playwright test",
+    "prestart": "node build-blueprint.mjs"
+  },
+  "devDependencies": {
+    "@wp-playground/cli": "3.1.62",
+    "@playwright/test": "1.64.1"
+  }
+}

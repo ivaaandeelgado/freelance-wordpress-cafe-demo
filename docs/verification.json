@@ -1,0 +1,22 @@
+{
+  "verifiedAtUtc": "2026-11-06T10:53:27.670Z",
+  "sourceVersion": "2.0.0",
+  "environment": "Windows, Node.js 24, headless Google Chrome",
+  "browserTestsPassed": 7,
+  "browserTestsFailed": 0,
+  "verificationMethod": "Latest result per test, including a targeted recheck where present.",
+  "runs": [
+    {
+      "startedAtUtc": "2026-11-06T10:41:58.601Z",
+      "passed": 6,
+      "failed": 1
+    },
+    {
+      "startedAtUtc": "2026-11-06T10:53:27.670Z",
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "unitTestsPassed": 0,
+  "scope": "Synthetic local demonstration; mobile viewport emulation; no production deployment."
+}
