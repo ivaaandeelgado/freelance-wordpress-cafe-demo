@@ -40,7 +40,7 @@ test('weekend preview cannot select times outside the displayed opening hours', 
   await page.getByLabel('Día', { exact: true }).fill(saturday);
   await page.getByLabel('Día', { exact: true }).dispatchEvent('change');
   await expect(page.locator('select[name="time"] option').filter({ hasText: '16:00' })).toHaveJSProperty('disabled', true);
-  await page.getByLabel('Tu nombre').fill('Alex');
+  await page.getByLabel('Tu nombre', { exact: true }).fill('Alex');
   // A disabled time must not produce a successful preview even if assigned directly.
   await page.getByRole('combobox', { name: 'Hora', exact: true }).evaluate(select => { select.value = '16:00'; });
   await page.getByRole('button', { name: 'Ver mi visita' }).click();

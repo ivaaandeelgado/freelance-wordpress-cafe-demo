@@ -55,13 +55,13 @@ test('visit preview rejects whitespace and past dates, transmits nothing, and cl
   await page.getByRole('button', { name: 'Ver mi visita' }).click();
   expect(await page.locator('#visit-form').evaluate(form => form.checkValidity())).toBeFalsy();
   await expect(page.getByRole('status')).toBeHidden();
-  await page.getByLabel('Tu nombre').fill('  ');
+  await page.getByLabel('Tu nombre', { exact: true }).fill('  ');
   const minDate = await page.getByLabel('Día', { exact: true }).getAttribute('min');
   await page.getByLabel('Día', { exact: true }).fill(minDate);
   await page.getByRole('combobox', { name: 'Hora', exact: true }).selectOption('10:00');
   await page.getByRole('button', { name: 'Ver mi visita' }).click();
   await expect(page.getByRole('status')).toBeHidden();
-  await page.getByLabel('Tu nombre').fill('Alex');
+  await page.getByLabel('Tu nombre', { exact: true }).fill('Alex');
   await page.getByLabel('Día', { exact: true }).fill('2020-01-01');
   await page.getByRole('button', { name: 'Ver mi visita' }).click();
   expect(await page.locator('#visit-form').evaluate(form => form.checkValidity())).toBeFalsy();
@@ -70,7 +70,7 @@ test('visit preview rejects whitespace and past dates, transmits nothing, and cl
   await expect(page.getByRole('status')).toContainText('no se ha reservado, enviado ni guardado nada');
   expect(submissions).toEqual([]);
   await page.reload();
-  await expect(page.getByLabel('Tu nombre')).toHaveValue('');
+  await expect(page.getByLabel('Tu nombre', { exact: true })).toHaveValue('');
   await expect(page.getByRole('status')).toBeHidden();
 });
 

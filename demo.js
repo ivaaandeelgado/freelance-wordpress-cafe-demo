@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
       let groupMatches = 0;
       group.querySelectorAll('.menu-item').forEach(item => {
         const price = Number(item.querySelector('.menu-price').textContent.replace('€', '').trim().replace(',', '.'));
-        const visible = categoryMatches && normalize(item.querySelector('.menu-item-copy').textContent).includes(query) && price <= cap;
+        const productId = item.querySelector('[data-product]')?.dataset.product;
+        const product = window.MigaExperience?.catalog.find(product => product.id === productId);
+        const preferences = (!document.querySelector('#menu-vegan')?.checked || product?.vegan) && (!document.querySelector('#menu-favorites')?.checked || window.MigaFavorites?.has(productId));
+        const visible = categoryMatches && preferences && normalize(item.querySelector('.menu-item-copy').textContent).includes(query) && price <= cap;
         item.hidden = !visible;
         if (visible) { matches++; groupMatches++; }
       });
@@ -35,10 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
   maximum?.addEventListener('input', applyFilters);
   document.querySelector('#menu-reset')?.addEventListener('click', () => {
     search.value = ''; maximum.value = ''; selectedCategory = 'all';
+    for (const id of ['menu-vegan','menu-favorites']) { const input=document.getElementById(id); if(input)input.checked=false; }
     filterButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === 'all')));
     applyFilters(); search.focus();
   });
   if (groups.length) applyFilters();
+  document.addEventListener('miga:filter', applyFilters);
 
   const form = document.querySelector('#visit-form');
   if (!form) return;

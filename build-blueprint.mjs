@@ -1,4 +1,5 @@
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
+import { ritualMarkup, menuToolsMarkup, seatMarkup, globalExperienceMarkup } from './experience-markup.mjs';
 
 let sequence = 0;
 const id = () => (++sequence).toString(16).padStart(8, '0');
@@ -28,7 +29,7 @@ function footer() {
     box('footer-bottom', [text('CONCEPTO PERSONAL / IVAN DELGADO'), text('Marca y local ficticios. Imágenes creadas con IA.<br>Demo sin pedidos, pagos ni reservas reales.')]),
   ])], { html_tag: 'footer' });
 }
-const root = (active, content) => [box(`miga-root page-${active}`, [...header(active), box('page-content', content, { html_tag: 'main', _element_id: 'main-content' }), footer()])];
+const root = (active, content) => [box(`miga-root page-${active}`, [...header(active), box('page-content', content, { html_tag: 'main', _element_id: 'main-content' }), footer(), html(globalExperienceMarkup)])];
 const home = root('home', [
   box('home-hero', [
     photo('cafe.png', 'Interior conceptual de Miga: barra de madera, mesas y luz de la mañana.', 'hero-photo'),
@@ -40,6 +41,7 @@ const home = root('home', [
     box('story-visual', [photo('breakfast.png', 'Cappuccino, croissant y tostada sobre una mesa de madera.', 'breakfast-photo'), text('EL PRIMER CAFÉ. EL MEJOR MOMENTO.', 'photo-caption')]),
     box('story-copy', [text('DE LA BARRA A TU MESA', 'eyebrow'), heading('Pocas cosas.<br><em>Bien hechas.</em>'), text('Café con carácter, masa madre y un obrador que huele a mantequilla. Una carta corta para encontrar algo que apetezca a cualquier hora.'), box('small-menu', [box('small-menu-row', [text('01'), heading('Café de especialidad', 'h3'), text('El ritual de cada día.')]), box('small-menu-row', [text('02'), heading('Recién del horno', 'h3'), text('Crujiente por fuera. Tierno por dentro.')]), box('small-menu-row', [text('03'), heading('Algo para quedarse', 'h3'), text('Tostadas y bocados sin complicaciones.')])]), button('Explora lo que preparamos', '@@CARTA@@', 'text-link')]),
   ]),
+  box('ritual-section shell', [html(ritualMarkup)]),
   box('pause-banner', [box('shell pause-inner', [text('SIN MIRAR EL RELOJ', 'eyebrow'), heading('Hay sitio<br>para otra <em>pausa.</em>'), box('pause-action', [text('Busca tu mesa favorita.<br>Nosotros imaginamos el resto.'), button('Conoce el espacio', '@@VISIT@@', 'outline-button')])])]),
 ]);
 
@@ -50,15 +52,17 @@ const products = {
 };
 const menuGroups = Object.entries(products).map(([key, category]) => box(`menu-group category-${key}`, [
   box('menu-group-heading', [text(category.number, 'menu-number'), box('menu-group-title', [heading(category.title, 'h2'), text(category.sub, 'eyebrow')])]),
-  ...category.rows.map(([name, description, price]) => box('menu-item', [box('menu-item-copy', [heading(name, 'h3'), text(description)]), text(`${price} €`, 'menu-price')])),
+  ...category.rows.map(([name, description, price], index) => box(`menu-item product-${key}-${index}`, [box('menu-item-copy', [heading(name, 'h3'), text(description)]), text(`${price} €`, 'menu-price'), html(`<div class="menu-item-actions"><button type="button" data-favorite="${key}-${index}" aria-label="Guardar ${name} en favoritos" aria-pressed="false">♡</button><button type="button" data-product="${key}-${index}">Preparar <span>+</span></button></div>`)])),
 ], { _element_id: `category-${key}` }));
 const menu = root('menu', [
   box('menu-intro shell', [box('menu-intro-copy', [text('02 / HECHO PARA DISFRUTAR', 'eyebrow'), heading('La <em>carta.</em>', 'h1'), text('Lo de siempre, con un poco más de cariño.<br>Elige tu ritual de hoy.')]), photo('breakfast.png', 'Desayuno conceptual de café, croissant y tostada.', 'menu-intro-photo')]),
   box('menu-section shell', [
     html('<div class="menu-controls" role="group" aria-label="Filtrar la carta"><button type="button" data-filter="all" aria-pressed="true">Toda la carta <span>↘</span></button><button type="button" data-filter="cafe" aria-pressed="false">Café</button><button type="button" data-filter="horno" aria-pressed="false">Obrador</button><button type="button" data-filter="cocina" aria-pressed="false">Para quedarse</button></div><div class="menu-search-row"><label>Buscar en la carta<input id="menu-search" type="search" placeholder="Café, limón, chocolate…" maxlength="80"></label><label>Precio máximo (€)<input id="menu-maximum" type="number" min="0" step="0.5" placeholder="Sin límite"></label><button id="menu-reset" type="button">Limpiar filtros</button></div><p id="menu-status" class="menu-result-count" role="status" aria-live="polite"></p><p id="menu-empty" class="menu-empty" hidden>No hay opciones con estos filtros. Prueba otra búsqueda o un precio diferente.</p>'),
+    html(menuToolsMarkup),
     box('menu-columns', menuGroups),
-    text('Carta y precios ilustrativos de una marca ficticia. Esta demo no permite realizar pedidos.', 'menu-disclaimer'),
+    text('Carta y precios ilustrativos. Puedes preparar una selección de ejemplo; no se realizan pedidos reales.', 'menu-disclaimer'),
   ]),
+  box('ritual-section shell', [html(ritualMarkup)]),
   box('menu-callout shell', [heading('¿Tu mesa de siempre?<br><em>Todavía está por descubrir.</em>'), button('Imagina tu visita', '@@VISIT@@')]),
 ]);
 
@@ -76,8 +80,10 @@ const visit = root('visit', [
     box('visit-info', [text('LA VIDA ALREDEDOR DE UNA MESA', 'eyebrow'), heading('Un rincón<br><em>de barrio.</em>'), text('Este concepto imagina un pequeño café mediterráneo. Un lugar cercano, de luz cálida y conversaciones largas.'), box('hours', [heading('Horario del concepto', 'h3'), box('hours-row', [text('Lunes a viernes'), text('08:00 — 18:00')]), box('hours-row', [text('Sábado y domingo'), text('09:00 — 14:00')])]), text('LOCAL FICTICIO · SIN DIRECCIÓN COMERCIAL', 'location-note'), html('<details class="visit-faq"><summary>¿Puedo hacer una reserva real?</summary><p>No. Miga es una demostración de portafolio. El formulario solo muestra una vista previa en tu navegador.</p></details>')]),
     box('reservation-panel', [text('UN ENSAYO DE TU PRÓXIMA PAUSA', 'eyebrow'), heading('Imagina tu visita.', 'h2'), text('Prueba el formulario de esta demo.'), html(reservation)]),
   ]),
+  box('seat-section shell', [html(seatMarkup)]),
 ]);
 
+const catalog = Object.entries(products).flatMap(([category, group]) => group.rows.map(([name, description, price], index) => ({id:`${category}-${index}`, category, name, description, cents:Math.round(Number(price.replace(',','.'))*100), vegan:['cafe-0','cafe-4','cocina-0','cocina-1'].includes(`${category}-${index}`)})));
 const templates = { home, menu, visit };
 await mkdir('artifacts/templates', { recursive: true });
 await mkdir('artifacts/miga-demo/assets', { recursive: true });
@@ -87,17 +93,19 @@ const plugin = `<?php
 /**
  * Plugin Name: Miga Portfolio Demo
  * Description: Original editorial design and browser-only menu / visit preview.
- * Version: 1.0.0
+ * Version: 3.0.0
  * License: GPL-2.0-or-later
  */
 if (!defined('ABSPATH')) { exit; }
+require_once __DIR__ . '/miga-experience.php';
 add_filter('elementor/frontend/print_google_fonts', '__return_false');
 add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style('miga-demo', plugins_url('demo.css', __FILE__), [], '1.0.0');
   wp_enqueue_script('miga-demo', plugins_url('demo.js', __FILE__), [], '1.0.0', true);
 }, 100);
 `;
-for (const [name, data] of [['miga-demo.php', plugin], ['demo.css', css], ['demo.js', js]]) await writeFile(`artifacts/miga-demo/${name}`, data);
+const pluginFiles = [['miga-demo.php', plugin], ['demo.css', css], ['demo.js', js], ['catalog.json', JSON.stringify(catalog)], ...await Promise.all(['experience.css','experience.js','miga-experience.php'].map(async name=>[name,await readFile(name,'utf8')]))];
+for (const [name, data] of pluginFiles) await writeFile(`artifacts/miga-demo/${name}`, data);
 const images = {};
 for (const file of ['cafe.png', 'breakfast.png']) {
   images[file] = (await readFile(`assets/${file}`)).toString('base64');
@@ -149,7 +157,7 @@ const blueprint = {
     { step: 'setSiteOptions', options: { blogname: 'Miga — Café & obrador', blogdescription: 'Concepto personal de portafolio', admin_email: 'demo@example.test' } },
     { step: 'installPlugin', pluginData: { resource: 'url', url: 'https://downloads.wordpress.org/plugin/elementor.4.3.6.zip' }, options: { activate: true } },
     { step: 'mkdir', path: '/wordpress/wp-content/plugins/miga-demo/assets' },
-    ...[['miga-demo.php', plugin], ['demo.css', css], ['demo.js', js]].map(([name, data]) => ({ step: 'writeFile', path: `/wordpress/wp-content/plugins/miga-demo/${name}`, data })),
+    ...pluginFiles.map(([name, data]) => ({ step: 'writeFile', path: `/wordpress/wp-content/plugins/miga-demo/${name}`, data })),
     { step: 'activatePlugin', pluginPath: 'miga-demo/miga-demo.php' },
     { step: 'writeFile', path: '/wordpress/wp-content/miga-images.json', data: JSON.stringify(images) },
     ...await Promise.all(Object.keys(templates).map(async key => ({ step: 'writeFile', path: `/wordpress/wp-content/miga-${key}.json`, data: await readFile(`artifacts/templates/miga-${key}.json`, 'utf8') }))),
