@@ -6,6 +6,20 @@ A personal WordPress / Elementor project by **Ivan Delgado**, created with AI as
 
 ![Miga home page](docs/screenshots/home-desktop.png)
 
+## See the interactions
+
+Actual screenshots from the running WordPress demo, captured on 9 November 2026. Click an image for the full view.
+
+| Personalize a drink | Check the quote with WordPress |
+| --- | --- |
+| [![Drink configurator with options and a calculated total](docs/screenshots/configurator-desktop.png)](docs/screenshots/configurator-desktop.png) | [![Persistent bag with a matching server-validated quote](docs/screenshots/bag-verified-desktop.png)](docs/screenshots/bag-verified-desktop.png) |
+
+| Find a menu combination | Explore a fictional table plan |
+| --- | --- |
+| [![Menu recommendations based on preferences and budget](docs/screenshots/ritual-desktop.png)](docs/screenshots/ritual-desktop.png) | [![Interactive seating preview and calendar download](docs/screenshots/seating-preview-desktop.png)](docs/screenshots/seating-preview-desktop.png) |
+
+[View the configurator at a 360 px mobile viewport](docs/screenshots/configurator-mobile.png). The [capture record](docs/showcase-verification.json) records the observed client/server price and browser environment. These are fictional products and simulated seating; the demo creates no order, payment or reservation.
+
 ## Included features
 
 - Three actual WordPress pages: home, menu and visit, with native editable Elementor sections.

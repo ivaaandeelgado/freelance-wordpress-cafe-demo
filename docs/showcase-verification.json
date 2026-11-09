@@ -1,0 +1,11 @@
+{
+  "capturedAtUtc": "2026-11-09T08:23:17.967Z",
+  "sourceCommit": "b07df17b6df22f8c6dcc7939d5e22cc0a3773732",
+  "browser": "Google Chrome, headless",
+  "desktopViewport": "1440x1000",
+  "mobileViewport": "360x800 (emulated)",
+  "observedPrice": "10,40 €",
+  "observedServerQuote": "Presupuesto comprobado. No se ha creado ningún pedido ni cobro. Total: 10,40 €.",
+  "clientErrors": [],
+  "statement": "Screenshots of a real local WordPress/Elementor demo with fictional data. No booking, purchase or payment."
+}
