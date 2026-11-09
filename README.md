@@ -4,6 +4,16 @@ A personal WordPress / Elementor project by **Ivan Delgado**, created with AI as
 
 [![Checks](https://github.com/ivaaandeelgado/freelance-wordpress-cafe-demo/actions/workflows/checks.yml/badge.svg)](https://github.com/ivaaandeelgado/freelance-wordpress-cafe-demo/actions/workflows/checks.yml)
 
+## Try it in your browser
+
+**[Open the interactive Miga demo](https://playground.wordpress.net/?mode=seamless&blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2Fivaaandeelgado%2Ffreelance-wordpress-cafe-demo%2Fmain%2Fdocs%2Fplayground.json)**
+
+No installation or account is needed. WordPress Playground downloads WordPress and Elementor, then runs your own demo copy inside the browser. The first launch can take about a minute, depending on your connection.
+
+Try **La carta → Preparar** to customize a drink, add it to the bag and choose **Comprobar presupuesto** to run the PHP price check. Explore **Ven a vernos** for the fictional seating and visit preview. Use fictional data; the demo takes no orders, payments or reservations.
+
+To inspect the WordPress pages, [open the same demo with Playground controls](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2Fivaaandeelgado%2Ffreelance-wordpress-cafe-demo%2Fmain%2Fdocs%2Fplayground.json) and enter `/wp-admin/` in Playground's address field. This is a browser sandbox, not a production website. Your browser may retain the demo state.
+
 ![Miga home page](docs/screenshots/home-desktop.png)
 
 ## See the interactions
@@ -89,6 +99,8 @@ Thirteen Playwright checks cover actual Elementor content, navigation, images, f
 | `tests/` | Interaction, content and layout checks |
 
 `npm run build` creates three Elementor templates under `artifacts/templates/` and the companion plugin under `artifacts/miga-demo/`. To import elsewhere, install Elementor and the plugin, create the three pages, and replace the `@@CARTA@@` / `@@VISIT@@` link placeholders. For a subdirectory WordPress installation, update the image URLs or reselect Media Library images. The local blueprint does this setup for its own runtime.
+
+`npm run build:browser` also generates `docs/playground.json`. It adapts links to Playground's scoped URLs, pins the original image assets to a reviewed public commit, and skips Elementor's first-run connection prompt. `npm run check:browser` checks the public launch in an isolated Chrome session; use `npm run check:browser -- --local-blueprint` to intercept only the unpublished blueprint while preparing changes. The remaining runtime and assets are fetched normally. See the official [Blueprint URL documentation](https://developer.wordpress.org/playground/blueprints/using-blueprints/) for the browser launch mechanism.
 
 The product definitions in `build-blueprint.mjs` generate both the editable product presentation and the canonical `catalog.json` used for quotations. Change prices there and rebuild to keep both consistent; editing a displayed Elementor price alone does not change the quotation API. Dynamic interactions are implemented in the companion plugin and HTML widgets; they are not additional Elementor Pro widgets.
 

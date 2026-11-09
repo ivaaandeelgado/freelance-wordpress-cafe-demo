@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "node build-blueprint.mjs",
+    "build:browser": "node build-blueprint.mjs && node build-browser-blueprint.mjs",
+    "check:browser": "node tools/check-playground.mjs",
     "start": "node serve.mjs",
     "test": "playwright test",
     "prestart": "node build-blueprint.mjs"
