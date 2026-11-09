@@ -1,0 +1,54 @@
+{
+  "checkedAtUtc": "2026-11-09T08:48:44.525Z",
+  "sourceCommit": "8cb31078af2f6d9b67aca38d9cc064a6c73448b0",
+  "mode": "Public URL, isolated Chrome session, no request interception",
+  "url": "https://playground.wordpress.net/?mode=seamless&blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2Fivaaandeelgado%2Ffreelance-wordpress-cafe-demo%2Fmain%2Fdocs%2Fplayground.json",
+  "environment": "Google Chrome on Windows; mobile viewport emulation",
+  "passed": true,
+  "checks": [
+    {
+      "check": "home loaded"
+    },
+    {
+      "check": "menu navigation"
+    },
+    {
+      "check": "menu search",
+      "result": "1 opción disponible."
+    },
+    {
+      "check": "WordPress PHP quotation from browser",
+      "result": "Presupuesto comprobado. No se ha creado ningún pedido ni cobro. Total: 10,40 €."
+    },
+    {
+      "check": "server ignores forged prices and rejects unknown products",
+      "totalCents": 1040,
+      "invalidStatus": 400
+    },
+    {
+      "check": "visit page navigation"
+    },
+    {
+      "check": "home navigation returns to same sandbox"
+    },
+    {
+      "check": "WordPress admin page list available",
+      "titles": [
+        "Miga — El café",
+        "Miga — La carta",
+        "Miga — Visítanos",
+        "Privacy Policy",
+        "Sample Page"
+      ]
+    }
+  ],
+  "mobileViewport": {
+    "viewport": 390,
+    "document": 390
+  },
+  "unexpectedBrowserErrors": [],
+  "expectedValidationResponse": {
+    "unknownProduct": 400
+  },
+  "limits": "Browser sandbox only. No real orders, bookings, email or payment. This is a focused public-launch check; the 13-test application suite is documented separately."
+}
