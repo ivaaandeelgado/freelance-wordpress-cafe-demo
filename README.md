@@ -52,7 +52,7 @@ Open `/wp-admin/` with the **synthetic local** account `admin` / `local-demo-onl
 
 ## Tests and reproducibility
 
-**Version 3 validation is partial.** The new WordPress API check passed, including forged prices, unknown products and invalid quantities. Two existing page/filter checks also passed. The cart flow exceeded the original 10-second timeout in the local WASM runtime; the client timeout is now 45 seconds and needs a complete recheck. A non-exact test selector was corrected as well. The full suite has not yet passed for this version; GitHub Actions runs it on each update.
+**All 13 browser tests passed for version 3** in [GitHub Actions run 42224770916](https://github.com/ivaaandeelgado/freelance-wordpress-cafe-demo/actions/runs/42224770916), completed on 6 November 2026. The successful run tested commit `b07df17b6df22f8c6dcc7939d5e22cc0a3773732`, including the corrected cart timeout and selectors. The run log reports `13 passed (1.6m)`. This verifies the demo in Chromium on Ubuntu; mobile checks use viewport emulation.
 
 With Google Chrome installed and any manually started demo server stopped:
 
@@ -60,7 +60,7 @@ With Google Chrome installed and any manually started demo server stopped:
 npm test
 ```
 
-Thirteen Playwright checks cover actual Elementor content, navigation, images, filters, literal search text, visit validation, weekend hours, responsive layouts, cart persistence, custom prices, API tampering, favorites, recommendations, seating and calendar downloads. Tests start their own runtime and write ignored screenshots/results to `evidence/`. CI uses Chromium on standard Ubuntu runners. The [verification summary](docs/verification.json) records the local run.
+Thirteen Playwright checks cover actual Elementor content, navigation, images, filters, literal search text, visit validation, weekend hours, responsive layouts, cart persistence, custom prices, API tampering, favorites, recommendations, seating and calendar downloads. Tests start their own runtime and write ignored screenshots/results to `evidence/`. CI uses Chromium on standard Ubuntu runners. The [verification summary](docs/verification.json) records the successful CI run and preserves the earlier partial local result.
 
 | File | Responsibility |
 | --- | --- |

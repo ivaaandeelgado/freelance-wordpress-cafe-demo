@@ -1,10 +1,29 @@
 {
   "sourceVersion": "3.0.0",
-  "verifiedAtUtc": "2026-11-06T13:18:15.000533+00:00",
-  "browserTestsPassed": 1,
-  "browserTestsFailed": 1,
-  "status": "partial-verification-timebox-ended",
+  "verifiedAtUtc": "2026-11-09T08:15:43Z",
+  "status": "ci-full-suite-passed",
+  "browserTestsPassed": 13,
+  "browserTestsFailed": 0,
   "scope": "Local WordPress and Elementor. No real orders, payments or bookings. No external deployment.",
-  "knownIssue": "The first cart check reached the API request but exceeded the original 10-second client timeout in the local WASM runtime. The timeout was increased to 45 seconds in source; that change still needs an end-to-end recheck.",
-  "regressionNotes": "Two original checks passed in the current run. A third exposed a non-exact test label matching the new seating region; selectors were corrected. The full 13-test suite has not yet completed for this version."
+  "ci": {
+    "runId": 42224770916,
+    "url": "https://github.com/ivaaandeelgado/freelance-wordpress-cafe-demo/actions/runs/42224770916",
+    "commit": "b07df17b6df22f8c6dcc7939d5e22cc0a3773732",
+    "completedAtUtc": "2026-11-06T13:23:19Z",
+    "conclusion": "success",
+    "browser": "Chromium",
+    "runner": "ubuntu-24.04",
+    "logSummary": "13 passed (1.6m)",
+    "mobileVerification": "Emulated viewport sizes; no physical-device certification."
+  },
+  "previousLocalRun": {
+    "sourceVersion": "3.0.0",
+    "verifiedAtUtc": "2026-11-06T13:18:15.000533+00:00",
+    "browserTestsPassed": 1,
+    "browserTestsFailed": 1,
+    "status": "partial-verification-timebox-ended",
+    "scope": "Local WordPress and Elementor. No real orders, payments or bookings. No external deployment.",
+    "knownIssue": "The first cart check reached the API request but exceeded the original 10-second client timeout in the local WASM runtime. The timeout was increased to 45 seconds in source; that change still needs an end-to-end recheck.",
+    "regressionNotes": "Two original checks passed in the current run. A third exposed a non-exact test label matching the new seating region; selectors were corrected. The full 13-test suite has not yet completed for this version."
+  }
 }
